@@ -35,7 +35,6 @@
 
     <div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
       <div class='lightbox-content'>
-        <img src="images/putin-power.jpg">
         <div class="lightbox-caption"><p>So much power</p></div>
       </div>
     </div>
@@ -66,16 +65,17 @@
       </div>
 
 
-      <div class="btn-group" style="margin-bottom: 30px;position: static;">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <div class="btn-group" >
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin:10px">
           Popular <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a href="#">Recent</a></li>
           <li><a href="#">Rising</a></li>
         </ul>
-        <button id="shaerbutton" href=/post.html"  type="button" class="btn btn-lg btn-primary" style="font-size: 14px; right:80px; position:absolute;">Share</button>
       </div>
+
+       <button id="shaerbutton" href="/post.html"  type="button" class="btn btn-lg btn-primary" style="margin:10px; font-size: 12px; position:absolute; right:72px">Share</button>
 
       <div id="searchbox">
         <table class="table table-hover">
@@ -93,8 +93,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <h5 style="color: blue;">
-                          <a href="/company.html" >Google</a>
+                        <h5 style="color: blue;">Google
                         </h5> 
                         <h6>Submited 1 Day Ago</h6>
                       </td>
@@ -104,7 +103,74 @@
               </td>
             </tr>
             
-            <tr id="com-outer-2" data-toggle="lightbox" href="#demoLightbox">
+            <tr id="com-outer-2">
+              <td>
+                <table>
+                  <tbody>
+                    <tr >
+                      <td><h4 id="com-text-2">Mauris a malesuada justo. Quisque tempus arcu in neque porttitor sodales. Phasellus ipsum nisi, blandit sit amet cursus in, accumsan eu...</h4></td>
+                    </tr>
+                    <tr>
+                      <td><h5 style="color: blue;">Yahoo</h5> <h6>Submited 3 Day Ago</h6></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <tr id="com-outer-3">
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><h4 id="com-text-3">Curabitur sit amet lorem nec lectus semper eleifend. Phasellus dictum eros sit amet orci congue convallis. Sed at nisi accumsan, suscipit nunc dignissim, gravida massa....</h4></td>
+                    </tr>
+                    <tr>
+                      <td><h5 style="color: blue;">Apple</h5><h6>Submited 4 Day Ago</h6></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <tr id="com-outer-4">
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><h4 id="com-text-4">Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacu...</h4></td>
+                    </tr>
+                    <tr>
+                      <td><h5 style="color: blue;">Spotify</h5> <h6>Submited 10 Day Ago</h6></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr id="com-outer-1">
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <h4 id="com-text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</h4>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5 style="color: blue;">Zynga
+                        </h5> 
+                        <h6>Submited 1 Day Ago</h6>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            
+            <tr id="com-outer-2">
               <td>
                 <table>
                   <tbody>
@@ -127,7 +193,7 @@
                       <td><h4 id="com-text-3">Curabitur sit amet lorem nec lectus semper eleifend. Phasellus dictum eros sit amet orci congue convallis. Sed at nisi accumsan, suscipit nunc dignissim, gravida massa....</h4></td>
                     </tr>
                     <tr>
-                      <td><h5 style="color: blue;">Livefyre</h5><h6>Submited 4 Day Ago</h6></td>
+                      <td><h5 style="color: blue;">Yammer</h5><h6>Submited 4 Day Ago</h6></td>
                     </tr>
                   </tbody>
                 </table>
@@ -162,6 +228,11 @@
     <script src="./js/bootstrap-lightbox.min.js"></script>
     <script>
       $(function() {
+
+        $( "#target" ).submit(function( event ) {
+          alert( "Handler for .submit() called." );
+          event.preventDefault();
+        });
         $("#shaerbutton").click(function(){
           window.location = "/post.html";
         })
@@ -172,8 +243,7 @@
           $("#com-text-1").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod nisi ac hendrerit interdum. Nam massa nisl, interdum eget iaculis id, imperdiet placerat augue. Pellentesque consectetur placerat elementum. Vestibulum gravida est id mollis gravida. Quisque tempor mi leo, at facilisis lorem feugiat ac. Fusce pretium porttitor viverra. Donec sed orci sodales, congue arcu eget, ullamcorper lectus. Aenean euismod orci tellus.");
         });
         $("#com-outer-2").click(function(){
-          //$('#demoLightbox').lightbox();
-          // $("#com-text-2").text("Mauris a magna ac dui dapibus porttitor. Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacus sed tempor tincidunt, arcu est condimentum magna, in dignissim ipsum quam a metus. Quisque in diam posuere, venenatis ante sit amet, egestas ipsum.");
+          $("#com-text-2").text("Mauris a magna ac dui dapibus porttitor. Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacus sed tempor tincidunt, arcu est condimentum magna, in dignissim ipsum quam a metus. Quisque in diam posuere, venenatis ante sit amet, egestas ipsum.");
         });
         $("#com-outer-3").click(function(){
           $("#com-text-3").text("Curabitur sit amet lorem nec lectus semper eleifend. Phasellus dictum eros sit amet orci congue convallis. Sed at nisi accumsan, suscipit nunc dignissim, gravida massa. Aenean rhoncus ac felis euismod ultrices.");
