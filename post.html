@@ -48,7 +48,7 @@
             <li><a href="#about">About</a></li>
           </ul>
           <div style="position:absolute; right:-20px">
-            <form class="navbar-form navbar-left" role="search">
+            <form aciton="/api"class="navbar-form navbar-left" role="search">
               <div class="form-group" >
                 <input type="text" class="form-control" placeholder="Search Companies">
               </div>
@@ -64,25 +64,25 @@
       <div class="jumbotron" style="padding-top:80px;">
       
 
-      <form class="form-horizontal" id="postform">
+      <form action="/api" id="postcomment" class="form-horizontal" id="postform">
         <fieldset>
 
         <div class="control-group" style="padding-top:10px;">
           <div class="controls">
-            <input id="textinput" name="textinput" type="text" placeholder="Company" class="input-xlarge form-control">
+            <input id="textinput" name="company" type="text" placeholder="Company" class="input-xlarge form-control">
           </div>
         </div>
 
 
         <div class="control-group" style="padding-top:10px;">
           <div class="controls">
-            <input id="textinput" name="textinput" type="text" placeholder="Position" class="input-xlarge form-control">
+            <input id="textinput" name="position" type="text" placeholder="Position" class="input-xlarge form-control">
         </div
 
         <!-- Textarea -->
         <div class="control-group" style="padding-top:10px;">
           <div class="controls">                     
-            <textarea id="textarea" name="textarea" class="form-control"></textarea>
+            <textarea id="textarea" name="comment" class="form-control"></textarea>
           </div>
         </div>
 
@@ -108,6 +108,30 @@
     <script>
       $(function() {
 
+        $( "#postcomment" ).submit(function( event ) {
+ 
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            debugger;
+           
+            // Get some values from elements on the page:
+            var $form = $( this ),
+              company = $form.find( "input[name='company']" ).val(),
+              position = $form.find( "input[name='position']" ).val(),
+              comment = $form.find( "textarea[name='comment']" ).val(),
+              url = $form.attr( "action" );
+           
+            // Send the data using post
+            var posting = $.post( url, { company: company, position:position, comment:comment } );
+            // Put the results in a div
+            posting.done(function( data ) {
+              debugger;
+
+              var content = $( data ).find( "#content" );
+              $( "#result" ).empty().append( content );
+            });
+        });
         $( "#postform" ).submit(function( event ) {
           var $inputs = $('#postform :input');
           alert( "Handler for .submit() called." );
