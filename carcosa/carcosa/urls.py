@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'carcosa.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 	url(r'^api', PostAPI.as_view(), name='post-view'),
+    url(r'^post', PostAPI.as_view(), name='post-view'),
     url(r'', Front.as_view(), name='post-view')
 )
