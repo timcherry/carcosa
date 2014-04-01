@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +13,10 @@
     <title>Reveal</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
 
@@ -80,16 +81,15 @@
       <div id="searchbox">
         <table class="table table-hover">
             <tbody>
-
             {% for post in posts %}
-              <tr id="com-outer-1">
+              <tr id="{{post.id}}" class="reveal_space">
                 <td>
                   <table>
                     <tbody>
                       <tr>
                           <td>
                               <div>
-                                  <h4 id="com-text-1">{{post.comment}}</h4>
+                                  <h4 id="reveal-text-{{post.id}}">{{post.hidden_comment}}</h4>
                               </div>
                           </td>
                       </tr>
@@ -104,120 +104,6 @@
                 </td>
               </tr>
             {% endfor %}
-            
-            <tr id="com-outer-2">
-              <td>
-                <table>
-                  <tbody>
-                    <tr >
-                      <td><h4 id="com-text-2">Mauris a malesuada justo. Quisque tempus arcu in neque porttitor sodales. Phasellus ipsum nisi, blandit sit amet cursus in, accumsan eu...</h4></td>
-                    </tr>
-                    <tr>
-                      <td><h5 style="color: blue;">Yahoo</h5> <h6>Submited 3 Day Ago</h6></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr id="com-outer-3">
-              <td>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td><h4 id="com-text-3">Curabitur sit amet lorem nec lectus semper eleifend. Phasellus dictum eros sit amet orci congue convallis. Sed at nisi accumsan, suscipit nunc dignissim, gravida massa....</h4></td>
-                    </tr>
-                    <tr>
-                      <td><h5 style="color: blue;">Apple</h5><h6>Submited 4 Day Ago</h6></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr id="com-outer-4">
-              <td>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td><h4 id="com-text-4">Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacu...</h4></td>
-                    </tr>
-                    <tr>
-                      <td><h5 style="color: blue;">Spotify</h5> <h6>Submited 10 Day Ago</h6></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr id="com-outer-1">
-              <td>
-                <table>
-                  <tbody>
-                    <tr>
-                        <td>
-                            <div>
-                                <h4 id="com-text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</h4>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5 style="color: blue;">Zynga
-                        </h5> 
-                        <h6>Submited 1 Day Ago</h6>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            
-            <tr id="com-outer-2">
-              <td>
-                <table>
-                  <tbody>
-                    <tr >
-                      <td><h4 id="com-text-2">Mauris a malesuada justo. Quisque tempus arcu in neque porttitor sodales. Phasellus ipsum nisi, blandit sit amet cursus in, accumsan eu...</h4></td>
-                    </tr>
-                    <tr>
-                      <td><h5 style="color: blue;">Facebook</h5> <h6>Submited 3 Day Ago</h6></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr id="com-outer-3">
-              <td>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td><h4 id="com-text-3">Curabitur sit amet lorem nec lectus semper eleifend. Phasellus dictum eros sit amet orci congue convallis. Sed at nisi accumsan, suscipit nunc dignissim, gravida massa....</h4></td>
-                    </tr>
-                    <tr>
-                      <td><h5 style="color: blue;">Yammer</h5><h6>Submited 4 Day Ago</h6></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr id="com-outer-4">
-              <td>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td><h4 id="com-text-4">Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacu...</h4></td>
-                    </tr>
-                    <tr>
-                      <td><h5 style="color: blue;">BitTorrent</h5> <h6>Submited 10 Day Ago</h6></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-
           </tbody>
         </table>
       </div>
@@ -225,28 +111,19 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/bootstrap-lightbox.min.js"></script>
+    <script src="{% static "js/jquery-1.11.0.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/bootstrap-lightbox.min.js" %}"></script>
     <script>
       $(function() {
         $("#shaerbutton").click(function(){
           window.location = "/post";
         })
-        $("#searchbutton").click(function(){
-          $("#searchbox").show();
-        });
-        $("#com-outer-1").click(function(){
-          $("#com-text-1").text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod nisi ac hendrerit interdum. Nam massa nisl, interdum eget iaculis id, imperdiet placerat augue. Pellentesque consectetur placerat elementum. Vestibulum gravida est id mollis gravida. Quisque tempor mi leo, at facilisis lorem feugiat ac. Fusce pretium porttitor viverra. Donec sed orci sodales, congue arcu eget, ullamcorper lectus. Aenean euismod orci tellus.");
-        });
-        $("#com-outer-2").click(function(){
-          $("#com-text-2").text("Mauris a magna ac dui dapibus porttitor. Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacus sed tempor tincidunt, arcu est condimentum magna, in dignissim ipsum quam a metus. Quisque in diam posuere, venenatis ante sit amet, egestas ipsum.");
-        });
-        $("#com-outer-3").click(function(){
-          $("#com-text-3").text("Curabitur sit amet lorem nec lectus semper eleifend. Phasellus dictum eros sit amet orci congue convallis. Sed at nisi accumsan, suscipit nunc dignissim, gravida massa. Aenean rhoncus ac felis euismod ultrices.");
-        });
-        $("#com-outer-4").click(function(){
-          $("#com-text-4").text("Proin elementum diam id sapien porttitor aliquet. Cras sed velit tellus. Etiam ac velit lobortis elit mollis commodo eu a mi. Sed auctor, lacus sed tempor tincidunt, arcu est condimentum magna, in dignissim ipsum quam a metus. Quisque in diam posuere, venenatis ante sit amet, egestas ipsum.");
+        $(".reveal_space").click(function(){
+          //var that = this;
+          $.get("reveal", {id:this.id}, function(data){
+            $("#reveal-text-" + this.id).text(data);
+          }.bind(this));
         });
       });
     </script>

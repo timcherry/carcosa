@@ -1,8 +1,17 @@
+from mongoengine import *
+from carcosa.settings import DBNAME
+
+connect(DBNAME)
+
+
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
-class Post(models.Model):
-    company = models.CharField(max_length=128)
-    position = models.CharField(max_length=128)
-    comment = models.TextField()
-    score = models.IntegerField()
+class Post(Document):
+    company = StringField(max_length=128)
+    position = StringField(max_length=128)
+    full_comment = StringField()
+    hidden_comment = StringField()
+    score = IntField()
+    sub_date = DateTimeField(default=datetime.utcnow)

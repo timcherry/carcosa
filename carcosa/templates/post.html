@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load staticfiles %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +14,10 @@
     <title>Reveal</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
 
@@ -102,9 +104,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/bootstrap-lightbox.min.js"></script>
+    <script src="{% static "js/jquery-1.11.0.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/bootstrap-lightbox.min.js" %}"></script>
     <script>
       $(function() {
 
