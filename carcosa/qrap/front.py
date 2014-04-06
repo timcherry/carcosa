@@ -8,5 +8,4 @@ from django.template import RequestContext, loader
 
 class Front(View):
     def get(self, request, *args, **kwargs):
-        sorted_posts = sorted(Post.objects.all(), key=lambda x: x.score, reverse=True)
-        return render(request, 'index.html', {"posts":sorted_posts})
+        return render(request, 'index.html', {"posts":Post.objects.order_by('-score')})

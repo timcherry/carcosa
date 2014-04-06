@@ -28,4 +28,7 @@ class PostAPI(View):
 
 class Reveal(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse(Post.objects.get(id=request.GET['id']).full_comment)
+        post = Post.objects.get(id=request.GET['id'])
+        post.score += 1
+        post.save()
+        return HttpResponse(post.full_comment)
