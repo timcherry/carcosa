@@ -18,10 +18,9 @@ class PostAPI(View):
         return render(request, 'post.html')
     
     def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
         body = json.loads(self.request.body)
         full_comment = body['comment']
-        hidden_comment  = full_comment[:max(16,int(.2*len(full_comment)))] + "..."
+        hidden_comment  = full_comment[:max(16, int(.2*len(full_comment)))] + "..."
         px = Post.objects.create(
             company=body['company'], 
             position=body['position'],

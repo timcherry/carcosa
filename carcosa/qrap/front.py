@@ -15,7 +15,7 @@ class Front(View):
 
     def get(self, request, *args, **kwargs):
         posts = []
-        for id in self.redis_c.zrange(SSET_KEY, 1, self.MAX_RANGE):
+        for id in self.redis_c.zrange(SSET_KEY, 0, self.MAX_RANGE, desc=True):
             try:
                 posts.append(Post.objects.get(id=id))
             except DoesNotExist, ValidationError:
