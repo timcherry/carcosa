@@ -13,5 +13,4 @@ class Post(Document):
     position = StringField(max_length=128)
     full_comment = StringField()
     hidden_comment = StringField()
-    score = IntField()
     sub_date = DateTimeField(default=datetime.utcnow)
