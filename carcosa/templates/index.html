@@ -120,7 +120,7 @@
           window.location = "/post";
         })
         $(".reveal_space").click(function(){
-          $.get("reveal", {id:this.id}, function(data){
+          $.get("/reveal", {id:this.id}, function(data){
             $("#reveal-text-" + this.id).text(data);
           }.bind(this));
         });
