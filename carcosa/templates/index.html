@@ -95,7 +95,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <h5 style="color: blue;">{{post.company}}</h5> 
+                          <h5 style="color: blue;"><a href="/c/{{post.company}}">{{post.company}}</a></h5> 
                           <h6>{{post.pretty_date}}</h6>
                         </td>
                       </tr>
@@ -120,7 +120,6 @@
           window.location = "/post";
         })
         $(".reveal_space").click(function(){
-          //var that = this;
           $.get("reveal", {id:this.id}, function(data){
             $("#reveal-text-" + this.id).text(data);
           }.bind(this));
