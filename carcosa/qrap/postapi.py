@@ -13,7 +13,7 @@ import time, os, simplejson
 import requests
 
 SSET_KEY = "popular"
-"https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code&code=AUTHORIZATION_CODE&redirect_uri=YOUR_REDIRECT_URI&client_id=YOUR_API_KEY&client_secret=YOUR_SECRET_KEY"
+
 consumer_key      =   '75yk9z2ug0z54w'
 consumer_secret  =   'iGZx5JiRnkVJWYxn'
 user_token           =   '14c8d65a-ef5d-4eff-b93d-72caf3c0020d'
@@ -34,10 +34,15 @@ class PostAPI(View):
         resp_json = resp.json()
         access_token = resp_json['access_token']
         expires_in = resp_json['expires_in']
-        url_people = "https://api.linkedin.com/v1/people/~?oauth2_access_token=%s"%(access_token)
-        resp_people = requests.get(url_people, headers={'x-li-format': 'json'})
-        headline = resp_people.json()['headline']
-        return render(request, 'post.html', {'headline':headline} )
+        #url_people = "https://api.linkedin.com/v1/people/~/positions?oauth2_access_token=%s"%(access_token)
+        url_positions = "https://api.linkedin.com/v1/people/~/positions?oauth2_access_token=%s"%(access_token)
+        resp_pos = requests.get(url_positions, headers={'x-li-format': 'json'})
+        titles = []
+        companies = []
+        for company in resp_pos.json()['values']:
+            titles.append(company["title"])
+            companies.append(company["company"]["name"])
+        return render(request, 'post.html', {'companies':companies, 'titles': titles} )
     
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body)

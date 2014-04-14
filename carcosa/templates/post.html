@@ -65,15 +65,23 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron" style="padding-top:80px;">
       
+        <ul class="nav nav-pills">
+          <li class="dropdown">
+
+            <a id="drop5" role="button" data-toggle="dropdown" href="#">Dropdown 2 <b class="caret"></b></a>
+              <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                {% for company in companies %}
+                  <li role="presentation"><a role="menuitem" tabindex="-1">{{company}}</a></li>
+                {% endfor %}
+              </ul>
+          </li>
+        </ul>
 
       <form action="/post" id="postcomment" class="form-horizontal" id="postform">{% csrf_token %}
         <fieldset>
 
-        <div class="control-group" style="padding-top:10px;">
-          <div class="controls">
-            <input id="textinput" name="company" type="text" placeholder="{{ headline }}" class="input-xlarge form-control">
-          </div>
-        </div>
+
+
 
 
         <div class="control-group" style="padding-top:10px;">
