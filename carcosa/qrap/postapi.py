@@ -7,15 +7,37 @@ import random
 from django.http import HttpResponseRedirect
 from datetime import datetime
 import redis
+import oauth2 as oauth
+import httplib2
+import time, os, simplejson
+import requests
 
 SSET_KEY = "popular"
+"https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code&code=AUTHORIZATION_CODE&redirect_uri=YOUR_REDIRECT_URI&client_id=YOUR_API_KEY&client_secret=YOUR_SECRET_KEY"
+consumer_key      =   '75yk9z2ug0z54w'
+consumer_secret  =   'iGZx5JiRnkVJWYxn'
+user_token           =   '14c8d65a-ef5d-4eff-b93d-72caf3c0020d'
+user_secret          =   '867c6833-0886-4991-85c9-ee91f2205b11'
+ 
 
+consumer = oauth.Consumer(consumer_key, consumer_secret)
+client = oauth.Client(consumer)
 
 class PostAPI(View):
     redis_c = redis.StrictRedis(host='localhost', port=6379, db=0)
+    oauth_url = "https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code&code=%s&redirect_uri=%s&client_id=%s&client_secret=%s"
+
     
     def get(self, request, *args, **kwargs):
-        return render(request, 'post.html')
+        url = self.oauth_url%(request.GET['code'], "http://localhost:8000/post", "75yk9z2ug0z54w", "iGZx5JiRnkVJWYxn")
+        resp = requests.post( url)
+        resp_json = resp.json()
+        access_token = resp_json['access_token']
+        expires_in = resp_json['expires_in']
+        url_people = "https://api.linkedin.com/v1/people/~?oauth2_access_token=%s"%(access_token)
+        resp_people = requests.get(url_people, headers={'x-li-format': 'json'})
+        headline = resp_people.json()['headline']
+        return render(request, 'post.html', {'headline':headline} )
     
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body)

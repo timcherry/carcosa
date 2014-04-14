@@ -75,6 +75,7 @@
           <li><a href="#">Rising</a></li>
         </ul>
       </div>
+       <button id="loginbutton" type="button" class="btn btn-lg btn-primary" style="font-size: 12px; position:absolute; right:80px">Login</button>
 
        <button id="shaerbutton" type="button" class="btn btn-lg btn-primary" style="font-size: 12px; position:absolute; right:10px">Share</button>
 
@@ -108,16 +109,22 @@
         </table>
       </div>
     </div>
+    <div id="dialog" title="Dialog Title">I'm in a dialog</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{% static "js/jquery-1.11.0.min.js" %}"></script>
+    <script src="{% static "js/jquery-ui-1.10.4.custom.min.js" %}"></script>
+    <script src="{% static "js/jquery.popupwindow.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/bootstrap-lightbox.min.js" %}"></script>
     <script>
       $(function() {
         $("#shaerbutton").click(function(){
           window.location = "/post";
+        });
+        $("#loginbutton").click(function(){
+            $.popupWindow("https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=75yk9z2ug0z54w&state=REVEAL1234&redirect_uri=http://localhost:8000/post");
         })
         $(".reveal_space").click(function(){
           $.get("/reveal", {id:this.id}, function(data){
