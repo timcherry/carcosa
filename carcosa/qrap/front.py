@@ -19,7 +19,7 @@ def render_list_of_posts(ids):
             post.pretty_date = get_pretty_date(post.sub_date)
             posts.append(post)
         except Exception as e:
-            print "ID MISMATCH. ID:%s NOT FOUND IN MONGODB. Error:%s"%(id, error)
+            print "ID MISMATCH. ID:%s NOT FOUND IN MONGODB. Error:%s"%(id, e)
             continue
     return posts
 

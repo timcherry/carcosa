@@ -66,12 +66,30 @@
       <div class="jumbotron" style="padding-top:80px;">
       
         <ul class="nav nav-pills">
+          <li>
+          <p>Select a company:</p>
+          </li>
           <li class="dropdown">
 
-            <a id="drop5" role="button" data-toggle="dropdown" href="#">Dropdown 2 <b class="caret"></b></a>
+            <a id="drop_company" role="button" data-toggle="dropdown" href="#">{{cur_company_name}}<b class="caret"></b></a>
               <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
                 {% for company in companies %}
-                  <li role="presentation"><a role="menuitem" tabindex="-1">{{company}}</a></li>
+                  <li role="presentation"><a class="company_menuitem" role="menuitem" tabindex="-1">{{company}}</a></li>
+                {% endfor %}
+              </ul>
+          </li>
+        </ul>
+
+        <ul class="nav nav-pills">
+          <li>
+            <p>Select a position:</p>
+          </li>
+          <li class="dropdown">
+
+            <a id="drop_title" role="button" data-toggle="dropdown" href="#">{{cur_company_title}}<b class="caret"></b></a>
+              <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                {% for title in titles %}
+                  <li role="presentation"><a class="title_menuitem"  role="menuitem" tabindex="-1">{{title}}</a></li>
                 {% endfor %}
               </ul>
           </li>
@@ -80,19 +98,10 @@
       <form action="/post" id="postcomment" class="form-horizontal" id="postform">{% csrf_token %}
         <fieldset>
 
-
-
-
-
-        <div class="control-group" style="padding-top:10px;">
-          <div class="controls">
-            <input id="textinput" name="position" type="text" placeholder="Position" class="input-xlarge form-control">
-        </div
-
         <!-- Textarea -->
         <div class="control-group" style="padding-top:10px;">
           <div class="controls">                     
-            <textarea id="textarea" name="comment" class="form-control"></textarea>
+            <textarea id="textarea" name="comment" style="height:120px" class="form-control"></textarea>
           </div>
         </div>
 
@@ -117,19 +126,27 @@
     <script src="{% static "js/bootstrap-lightbox.min.js" %}"></script>
     <script>
       $(function() {
+        $(".company_menuitem").click(function(){
+          $("#drop_company").text(this.text);
+        });
+
+        $(".title_menuitem").click(function(){
+          $("#drop_title").text(this.text);
+        });
 
         $( "#postcomment" ).submit(function( event ) {
- 
+            $('#dropDownId').val();
+
             // Stop form from submitting normally
             event.preventDefault();
-           
+            $("#drop_title");
             // Get some values from elements on the page:
             var $form = $( this ),
-              company = $form.find( "input[name='company']" ).val(),
-              position = $form.find( "input[name='position']" ).val(),
+              company = $("#drop_company").text(),
+              position = $("#drop_title").text(),
               comment = $form.find( "textarea[name='comment']" ).val(),
               url = $form.attr( "action" );
-           
+
             // Send the data using post
             $.post(url, JSON.stringify({"company":company, "position":position, "comment":comment}), function(){
               window.location= '/';
