@@ -57,3 +57,7 @@ class Company(View):
         return render(request,
                 'index.html',
                 {"posts": render_list_of_posts(self.redis_c.zrange(SSET_KEY + "-" + kwargs.get("company") , 0, -1, desc=True))})
+
+class Comment(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'comment.html' , {'comment': Post.objects.get(id=kwargs.get("comment")) })
