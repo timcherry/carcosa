@@ -49,9 +49,9 @@
             <li><a href="#about">About</a></li>
           </ul>
           <div style="position:absolute; right:-20px">
-            <form class="navbar-form navbar-left" role="search">
+            <form id="search_form" class="navbar-form navbar-left" role="search">
               <div class="form-group" >
-                <input type="text" class="form-control" placeholder="Search Companies">
+                <input id="search_box" type="text" class="form-control" placeholder="Search Companies">
               </div>
             </form>
           </div>
@@ -118,6 +118,10 @@
     <script src="{% static "js/bootstrap-lightbox.min.js" %}"></script>
     <script>
       $(function() {
+        $("#search_form").submit(function(){
+          window.location = "/c/" + $("#search_box").val();
+          return false;
+        })
         $("#shaerbutton").click(function(){
             $.popupWindow("https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=75yk9z2ug0z54w&state=REVEAL1234&redirect_uri=http://localhost:8000/post");
         })
