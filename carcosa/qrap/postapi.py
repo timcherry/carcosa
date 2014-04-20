@@ -36,17 +36,9 @@ class PostAPI(View):
         expires_in = resp_json['expires_in']
         url_positions = "https://api.linkedin.com/v1/people/~/positions?oauth2_access_token=%s"%(access_token)
         resp_pos = requests.get(url_positions, headers={'x-li-format': 'json'})
-        all_positions = resp_pos.json()['values']
-        # parse current position
-        cur_postion= all_positions.pop(0)
-        cur_company_name = cur_postion["company"]["name"]
-        cur_company_title = cur_postion["title"]
-        titles = []
-        companies = []
-        for postion in all_positions:
-            titles.append(postion["title"])
-            companies.append(postion["company"]["name"])
-        return render(request, 'post.html', {'cur_company_name': cur_company_name, 'cur_company_title': cur_company_title, 'companies':companies, 'titles': titles} )
+        positions = resp_pos.json()['values']        
+        positions.sort(key=lambda x: x['startDate']['year'] + x['startDate'].get('month', 1), reverse=True)
+        return render(request, 'post.html', {'positions': positions} )
     
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body)

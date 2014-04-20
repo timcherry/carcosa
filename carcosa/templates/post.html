@@ -21,7 +21,7 @@
 
     <!-- Custom styles for this template -->
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!-- Just for   gging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -71,10 +71,10 @@
           </li>
           <li class="dropdown">
 
-            <a id="drop_company" role="button" data-toggle="dropdown" href="#">{{cur_company_name}}<b class="caret"></b></a>
+            <a id="drop_company" role="button" data-toggle="dropdown" href="#">{{positions.0.company.name}}<b class="caret"></b></a>
               <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                {% for company in companies %}
-                  <li role="presentation"><a class="company_menuitem" role="menuitem" tabindex="-1">{{company}}</a></li>
+                {% for com in positions|slice:"1:" %}
+                  <li role="presentation"><a class="company_menuitem" role="menuitem" tabindex="-1">{{com.company.name}}</a></li>
                 {% endfor %}
               </ul>
           </li>
@@ -86,10 +86,10 @@
           </li>
           <li class="dropdown">
 
-            <a id="drop_title" role="button" data-toggle="dropdown" href="#">{{cur_company_title}}<b class="caret"></b></a>
+            <a id="drop_title" role="button" data-toggle="dropdown" href="#">{{positions.0.title}}<b class="caret"></b></a>
               <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                {% for title in titles %}
-                  <li role="presentation"><a class="title_menuitem"  role="menuitem" tabindex="-1">{{title}}</a></li>
+                {% for com in positions|slice:"1:" %}
+                  <li role="presentation"><a class="title_menuitem"  role="menuitem" tabindex="-1">{{com.title}}</a></li>
                 {% endfor %}
               </ul>
           </li>

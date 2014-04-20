@@ -60,4 +60,4 @@ class Company(View):
 
 class Comment(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'comment.html' , {'comment': Post.objects.get(id=kwargs.get("comment")) })
+        return render(request, 'comment.html' , {'comment': render_list_of_posts([kwargs.get("commentid")])[0]})
