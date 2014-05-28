@@ -6,8 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 from models import Post
 from django.template import RequestContext, loader
 from datetime import datetime
-
 import redis
+import json
+
 redis_c = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 SSET_KEY = "popular"
@@ -41,24 +42,14 @@ def get_pretty_date(date):
     return "Submitted %s %s ago"%(mag,unit)
 
 
+def build_ios_dict(posts):
+    ret_posts = []
+    for post in posts:
+        ret_posts.append({"hidden_comment": post.hidden_comment})
+    return ret_posts
 
-class Front(View):
-    MAX_RANGE = -1
-
+class HotList(View):
     def get(self, request, *args, **kwargs):
-        return render(request,
-                        'index.html',
-                        {"posts": render_list_of_posts(redis_c.zrange(SSET_KEY, 0, -1, desc=True) )})
-
-
-
-class Company(View):
-    redis_c = redis.StrictRedis(host='localhost', port=6379, db=0)
-    def get(self, request, *args, **kwargs):
-        return render(request,
-                'index.html',
-                {"posts": render_list_of_posts(self.redis_c.zrange(SSET_KEY + "-" + kwargs.get("company") , 0, -1, desc=True))})
-
-class Comment(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'comment.html' , {'comment': render_list_of_posts([kwargs.get("commentid")])[0]})
+        posts = render_list_of_posts(redis_c.zrange(SSET_KEY, 0, -1, desc=True))
+        ios_posts = build_ios_dict(posts)
+        return HttpResponse(json.dumps(ios_posts))

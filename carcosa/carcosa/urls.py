@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from qrap.postapi import PostAPI, Reveal
 from qrap.front import Front, Company, Comment
+from qrap.api import HotList
 
 admin.autodiscover()
 
@@ -14,5 +15,6 @@ urlpatterns = patterns('',
     url(r'^reveal', Reveal.as_view(), name='reveal-view'),
     url(r'^company/(?P<company>\w+)', Company.as_view(), name='company-view'),
     url(r'^comment/(?P<commentid>\w+)', Comment.as_view(), name='comment-view'),
+    url(r'^api', HotList.as_view(), name='hotlist-view'),
     url(r'', Front.as_view(), name='post-view')
 )
