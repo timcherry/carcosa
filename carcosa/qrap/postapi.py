@@ -13,6 +13,8 @@ import time, os, simplejson
 import requests
 
 SSET_KEY = "popular"
+AUTOCOMPLATE_KEY = "companies_auto_complete"
+
 
 consumer_key      =   '75yk9z2ug0z54w'
 consumer_secret  =   'iGZx5JiRnkVJWYxn'
@@ -51,6 +53,7 @@ class PostAPI(View):
             full_comment=full_comment, 
             sub_date=datetime.utcnow())
         rand_start_score = random.randint(1, 100)
+        self.redis_c.zadd(AUTOCOMPLATE_KEY, 0, "%s:%s"%(px.company.lower(), px.company))
         self.redis_c.zincrby(SSET_KEY, px.id, rand_start_score)
         self.redis_c.zincrby(SSET_KEY + "-" + px.company , px.id, rand_start_score)
 

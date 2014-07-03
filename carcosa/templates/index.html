@@ -149,6 +149,20 @@
             $("#reveal-text-" + this.id).text(data);
           }.bind(this));
         });
+       $('#search_box').autocomplete({
+           source: function( request, response ) {
+               $.ajax({
+                   url: "/autoc/",
+                   dataType: "json",
+                   data: {
+                       q: request.term
+                   },
+                   success: function (data) {
+                       response(data);
+                   }
+               });
+           }
+        });
       });
     </script>
   </body>

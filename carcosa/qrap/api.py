@@ -53,3 +53,8 @@ class HotList(View):
         posts = render_list_of_posts(redis_c.zrange(SSET_KEY, 0, -1, desc=True))
         ios_posts = build_ios_dict(posts)
         return HttpResponse(json.dumps(ios_posts))
+
+class AutoComplete(View):
+    def get(self, request, *args, **kwargs):
+        suggestions = ["fooz", "booz", "baaaaaz"]
+        return HttpResponse(json.dumps(suggestions))
