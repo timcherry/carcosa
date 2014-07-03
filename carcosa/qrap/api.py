@@ -12,6 +12,8 @@ import json
 redis_c = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 SSET_KEY = "popular"
+AUTOCOMPLATE_KEY = "companies_auto_complete"
+
 
 def render_list_of_posts(ids):
     posts = []
@@ -56,5 +58,11 @@ class HotList(View):
 
 class AutoComplete(View):
     def get(self, request, *args, **kwargs):
-        suggestions = ["fooz", "booz", "baaaaaz"]
+        word_chunk = request.GET.get('q')
+        min = "[%s"%(word_chunk)
+        max = "+"
+        suggestions = redis_c.zrangebylex(AUTOCOMPLATE_KEY,
+                                          min=min,
+                                          max=max)
+        suggestions = [s.split(":")[1] for s in suggestions]
         return HttpResponse(json.dumps(suggestions))
